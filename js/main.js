@@ -24,6 +24,9 @@ let monthValue = document.querySelector('.month-value');
 let dayValue = document.querySelector('.day-value');
 
 let money, time;
+expensesBtn.disabled = true;
+optionalExpensesBtn.disabled = true;
+countBtn.disabled = true;
 
 btn.addEventListener('click', function(){
     expensesBtn.removeAttribute('disabled');
@@ -42,6 +45,10 @@ btn.addEventListener('click', function(){
     yearValue.value = new Date(Date.parse(time)).getFullYear();
     monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
     dayValue.value = new Date(Date.parse(time)).getDate();
+
+    expensesBtn.disabled = false;
+    optionalExpensesBtn.disabled = false;
+    countBtn.disabled = false;
 });
 
 expensesBtn.addEventListener('click', function(){
@@ -72,11 +79,8 @@ optionalExpensesBtn.addEventListener('click', function(){
 
 countBtn.addEventListener('click', function(){
     if (appData.budget != undefined ) {
-        appData.moneyPerDay = (appData.budget / 30).toFixed(1);
-
-        let moneyPerDayNew = (appData.budget - +expensesValue.textContent) / 30;
-        dayBudgetValue.textContent = moneyPerDayNew.toFixed(1);
-    
+        appData.moneyPerDay = ((appData.budget - +expensesValue.textContent) / 30).toFixed(1);
+        dayBudgetValue.textContent = appData.moneyPerDay;
         if (appData.moneyPerDay < 100) {
             levelValue.textContent = "Минимальный уровень достатка";
         } else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
@@ -112,7 +116,6 @@ sumValue.addEventListener('input', function(){
         let perc = +percentValue.value;
         appData.monthIncome = (sum/100/12 * perc).toFixed(1);
         appData.yearIncome = (sum/100 * perc).toFixed(1);
-
         monthSavingsValue.textContent = appData.monthIncome;
         yearSavingsValue.textContent = appData.yearIncome;
     }
@@ -124,7 +127,6 @@ percentValue.addEventListener('input', function(){
         let perc = +percentValue.value;
         appData.monthIncome = (sum/100/12 * perc).toFixed(1);
         appData.yearIncome = (sum/100 * perc).toFixed(1);
-
         monthSavingsValue.textContent = appData.monthIncome;
         yearSavingsValue.textContent = appData.yearIncome;
     }
