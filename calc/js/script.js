@@ -37,5 +37,5 @@ let inputRub = document.getElementById('rub'),
             
     });
 
-
+//pls go
                         
