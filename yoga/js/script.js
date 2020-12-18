@@ -271,5 +271,6 @@ window.addEventListener('DOMContentLoaded', function(){
             totalValue.innerHTML = a * this.value;
         }
     });
-    
+
+
 });
